@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Newsitems from "./Newsitems";
 
 export class News extends Component {
-  article = [
+  articles = [
 
     {
       source: {
@@ -71,57 +71,34 @@ export class News extends Component {
         "If you think about how many photos and videos most of us are loading on to our smartphones with each passing day, its perhaps no surprise that theres rarely time to go back through and pick out speci… [+4910 chars]",
     },
   ];
-
-
-
-
-// constructor()
-//   {
-//     super();
-//     console.log("My cunstructor");
-//     this.state=
-//   {
-//     article:this.article
-//   }
-//   };
-
-//   render() {
-//     return (
-//       <div className="container my-4" >
-//         <h2>This a news app</h2>
-//       <div className="row my-3">
-//       { this.state.article.map((element)=>{
-//         return <div className="col-md-3" key={element.url}>
-//             <Newsitems title={element.title.slice(0,25)} description={element.description.slice(0,85)} myurl={element.urlToImage} url={element.url}/>
-//         </div>}
-//         ) 
-//         }
-
-//       </div>
-//       </div>
-//          )
-//   }
-// }
-
-
-  constructor() {
+ constructor() {
     super();
     console.log("Hello I am a constructor");
     this.state = {
-      article: this.article,
+      articles: this.articles,
       loading: false
     };
   }
+  async componentDidMount(){
+    console.log("cdm")
+     let url = "https://newsapi.org/v2/everything?q=tesla&from=2022-09-16&sortBy=publishedAt&apiKey=72e1bc647ef84ba38af1f3c66e756550";
+     let data = await fetch(url);
+     let parsedData = await data.json()
+     console.log(parsedData);
+     this.setState({articles: parsedData.articles} )
+  }
   render() {
+    console.log("render")
+    
     return (
       <div className="container my-3">
-        <h2>NewsUp - Top Headlines</h2>
+        <h1>NewsUp - Top Headlines</h1>
         <div className="row">
-          {this.state.article.map((element)=>{
-            return <div className="col-md-3" key={element.url}>
+          {this.state.articles.map((element)=>{
+            return <div className="col-md-4" key={element.url}>
             <Newsitems 
-              title={element.title.slice(0,88)}
-              description={element.description.slice(0,45)}
+              title={element.title ? element.title.slice(0,88):""}
+              description={element.description ? element.description.slice(0,45): ""}
               imageUrl={element.urlToImage}
               newsUrl ={element.url}/>
           </div>

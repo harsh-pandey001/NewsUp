@@ -1,24 +1,41 @@
-import React, { Component } from 'react'
-import img from './download.jpeg'
+import React, { Component } from "react";
+import img from "./download.jpeg";
 
 export class Newsitems extends Component {
-
-
   render() {
-    let {title, description, imageUrl,newsUrl } = this.props;
+    let { title, description, imageUrl, newsUrl, author, time, source} = this.props;
     return (
       <>
         <div className="card">
-        <img src={!imageUrl ? img:imageUrl} className="card-img-top" alt="..."/>
-       <div className="card-body">
-       <h5 className="card-title">{title}</h5>
-        <p className="card-text">{description}</p>
-        <a href={newsUrl} target= '_blank' className="btn btn-sm btn-primary">Read More</a>
-       </div>
-      </div>
+          <button type="button" className="btn btn-primary position-relative" >
+            {source}
+          </button>
+          <img
+            src={!imageUrl ? img : imageUrl}
+            className="card-img-top"
+            alt="..."
+          />
+          <div className="card-body">
+            <h5 className="card-title">{title}</h5>
+            <p className="card-text">{description}</p>
+            <p className="card-text">
+              <small className="text-muted">
+                by {!author ? "Unknown" : author} on{" "}
+                {new Date(time).toGMTString()}
+              </small>
+            </p>
+            <a
+              href={newsUrl}
+              target="_blank"
+              className="btn btn-sm btn-primary"
+            >
+              Read More
+            </a>
+          </div>
+        </div>
       </>
-    )
+    );
   }
 }
 
-export default Newsitems
+export default Newsitems;

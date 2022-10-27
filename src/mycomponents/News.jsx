@@ -36,12 +36,12 @@ export class News extends Component {
 
   async updated() {
     this.props.setProgress(0);
-    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=08121b6969144da5a7a10765e8f549bc&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     this.props.setProgress(30);
     let parsedData = await data.json();
-    this.props.setProgress(70);
     console.log(parsedData);
+    this.props.setProgress(70);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
@@ -51,34 +51,34 @@ export class News extends Component {
   }
   async componentDidMount() {
     this.updated();
+    this.setState({ page: this.state.page + 1 });
   }
 
-  handlePrevClick = async () => {
-    this.setState({ page: this.state.page - 1 });
-    this.updated();
-  };
-  handleNextClick = async () => {
-    this.setState({ page: this.state.page + 1 });
-    this.updated();
-  };
+  // handlePrevClick = async () => {
+  //   this.setState({ page: this.state.page - 1 });
+  //   this.updated();
+  // };
+  // handleNextClick = async () => {
+  //   this.setState({ page: this.state.page + 1 });
+  //   this.updated();
+  // };
 
   fetchMoreData = async () => {
-    this.setState({ page: this.state.page + 1 });
-    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=08121b6969144da5a7a10765e8f549bc&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-    this.setState({ loading: true });
+    // this.setState({ page: this.state.page + 1 });
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=72e1bc647ef84ba38af1f3c66e756550&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
     this.setState({
+      page: this.state.page + 1,
       articles: this.state.articles.concat(parsedData.articles),
       totalResults: parsedData.totalResults,
-      loading: false,
     });
   };
 
   render() {
     return (
-      <div className="container my-3">
+      <>
         <h1 className="text-center" style={{ margin: "40px 0px" }}>
           NewsUp - Top {this.capitalizeFirstLetter(this.props.category)}{" "}
           Headlines
@@ -89,7 +89,8 @@ export class News extends Component {
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
           hasMore={this.state.articles.length !== this.state.totalResults}
-          loader={<Spinner />}
+          loader={this.state.page + 1 >
+            Math.ceil(this.state.totalResults / this.props.pageSize) ? "" :<Spinner />}
         >
           <div className="container">
             <div className="row">
@@ -136,7 +137,7 @@ export class News extends Component {
             </button>
           </div>
         </div> */}
-      </div>
+      </>
     );
   }
 }

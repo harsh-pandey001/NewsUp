@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link} from "react-router-dom";
 
 
 const Navb = () => {
  
     return (
-      <nav className="navbar navbar-expand-lg bg-light">
+      <nav className="navbar fixed-top navbar-dark navbar-expand-lg bg-dark">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
             NewsUp

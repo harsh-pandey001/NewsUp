@@ -35,42 +35,27 @@ const News = (props) => {
 
   useEffect(() => {
     updated();
-    setPage(page + 1)
-    // this.setState({ page: page + 1 });
+    // eslint-disable-next-line
   }, []);
   
-  // handlePrevClick = async () => {
-    //   this.setState({ page: page - 1 });
-    //   this.updated();
-    // };
-    // handleNextClick = async () => {
-      //   this.setState({ page: page + 1 });
-      //   this.updated();
-      // };
       
       const fetchMoreData = async () => {
     // this.setState({ page: page + 1 });
-    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
     setArticles(articles.concat(parsedData.articles))
     setPage(page + 1)
     setTotalResults(parsedData.totalResults)
-    // this.setState({
-    //   page: page + 1,
-    //   articles: articles.concat(parsedData.articles),
-    //   totalResults: parsedData.totalResults,
-    // });
   };
 
   return (
     <>
-      <h1 className="text-center" style={{ margin: "40px 0px" }}>
+      <h1 className="text-center" style={{ margin: "40px 0px", marginTop: "90px" }}>
         NewsUp - Top {capitalizeFirstLetter(props.category)} Headlines
       </h1>
       {loading && <Spinner />}
-
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}

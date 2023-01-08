@@ -5,13 +5,15 @@ import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const News = (props) => {
+   
+  let mystyled = {
+    color : props.mode === 'dark'?'white':'#183148',
+    backgroundColor: props.mode === 'dark'?'#183148':'white'
+   }  
+
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-
-  // document.title = `${capitalizeFirstLetter(
-  //   props.category
-  // )} - NewsUp`;
 
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,25 +36,32 @@ const News = (props) => {
   };
 
   useEffect(() => {
+    document.title = `${capitalizeFirstLetter(props.category)} - NewsUp`;
     updated();
     // eslint-disable-next-line
   }, []);
-  
-      
-      const fetchMoreData = async () => {
+
+  const fetchMoreData = async () => {
     // this.setState({ page: page + 1 });
-    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`;
+    let url = `https://newsapi.org/v2/top-headlines?country=${
+      props.country
+    }&category=${props.category}&apiKey=${props.apiKey}&page=${
+      page + 1
+    }&pageSize=${props.pageSize}`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
-    setArticles(articles.concat(parsedData.articles))
-    setPage(page + 1)
-    setTotalResults(parsedData.totalResults)
+    setArticles(articles.concat(parsedData.articles));
+    setPage(page + 1);
+    setTotalResults(parsedData.totalResults);
   };
 
   return (
     <>
-      <h1 className="text-center" style={{ margin: "40px 0px", marginTop: "90px" }}>
+      <h1
+        className={`text-center text-${props.mode === 'light'?'dark':'light'}`}
+        style={{margin: "40px 0px", marginTop: "90px"} }
+      >
         NewsUp - Top {capitalizeFirstLetter(props.category)} Headlines
       </h1>
       {loading && <Spinner />}
@@ -61,15 +70,10 @@ const News = (props) => {
         next={fetchMoreData}
         hasMore={articles.length !== totalResults}
         loader={
-          page + 1 >
-          Math.ceil(totalResults / props.pageSize) ? (
-            ""
-          ) : (
-            <Spinner />
-          )
+          page + 1 > Math.ceil(totalResults / props.pageSize) ? "" : <Spinner />
         }
       >
-        <div className="container">
+        <div className="container" style={mystyled}>
           <div className="row">
             {articles.map((element) => {
               return (

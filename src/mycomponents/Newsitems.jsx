@@ -3,10 +3,10 @@ import img from "./download.jpeg";
 
 const Newsitems = (props) =>{
 
-    let { title, description, imageUrl, newsUrl, author, time, source} = props;
+    let { title, description, imageUrl, newsUrl, author, time,mode, source} = props;
     return (
       <>
-        <div className="card">
+        <div className={`card  ${mode === 'light'?'text-white':'text-black'} `  }>
           <button type="button" className="btn btn-primary position-relative" >
             {source}
           </button>
@@ -15,7 +15,7 @@ const Newsitems = (props) =>{
             className="card-img-top"
             alt="..."
           />
-          <div className="card-body">
+          <div className={`card-body ${mode === 'light'?"bg-dark":"bg-white"}  `}>
             <h5 className="card-title">{title}</h5>
             <p className="card-text">{description}</p>
             <p className="card-text">

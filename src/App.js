@@ -45,7 +45,7 @@ function App() {
                 apiKey={apiKey}
                 key="general"
                 pageSize={pageSize}
-                country={"in"} toggle={toggle} mode={mode}
+                country={"us"} toggle={toggle} mode={mode}
                 category={"general"}
               />
             }
@@ -59,7 +59,7 @@ function App() {
                 apiKey={apiKey}
                 key="sports"
                 pageSize={pageSize}
-                country={"in"} toggle={toggle} mode={mode}
+                country={"us"} toggle={toggle} mode={mode}
                 category={"sports"}
               />
             }
@@ -73,7 +73,7 @@ function App() {
                 apiKey={apiKey}
                 key="business"
                 pageSize={pageSize}
-                country={"in"} toggle={toggle} mode={mode}
+                country={"us"} toggle={toggle} mode={mode}
                 category={"business"}
               />
             }
@@ -87,7 +87,7 @@ function App() {
                 apiKey={apiKey}
                 key="general"
                 pageSize={pageSize}
-                country={"in"} toggle={toggle} mode={mode}
+                country={"us"} toggle={toggle} mode={mode}
                 category={"general"}
               />
             }
@@ -101,7 +101,7 @@ function App() {
                 apiKey={apiKey}
                 key="entertainment"
                 pageSize={pageSize}
-                country={"in"} toggle={toggle} mode={mode}
+                country={"us"} toggle={toggle} mode={mode}
                 category={"entertainment"}
               />
             }
@@ -115,7 +115,7 @@ function App() {
                 apiKey={apiKey}
                 key="health"
                 pageSize={pageSize}
-                country={"in"} toggle={toggle} mode={mode}
+                country={"us"} toggle={toggle} mode={mode}
                 category={"health"}
               />
             }
@@ -129,7 +129,7 @@ function App() {
                 apiKey={apiKey}
                 key="science"
                 pageSize={pageSize}
-                country={"in"} toggle={toggle} mode={mode}
+                country={"us"} toggle={toggle} mode={mode}
                 category={"science"}
               />
             }
@@ -143,7 +143,7 @@ function App() {
                 apiKey={apiKey}
                 key="technology"
                 pageSize={pageSize}
-                country={"in"} toggle={toggle} mode={mode}
+                country={"us"} toggle={toggle} mode={mode}
                 category={"technology"}
               />
             }

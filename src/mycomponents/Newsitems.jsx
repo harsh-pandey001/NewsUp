@@ -6,10 +6,12 @@ const Newsitems = (props) =>{
     let { title, description, imageUrl, newsUrl, author, time,mode, source} = props;
     return (
       <>
-        <div className={`card  ${mode === 'light'?'text-white':'text-black'} `  }>
+        <div className={`card  ${mode === 'light'?'text-white':'text-black'} mb-2 `  }>
           <button type="button" className="btn btn-primary position-relative" >
             {source}
           </button>
+          
+          {console.log(imageUrl)}
           <img
             src={!imageUrl ? img : imageUrl}
             className="card-img-top"

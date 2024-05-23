@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const News = (props) => {
-   
   let mystyled = {
     color : props.mode === 'dark'?'white':'#183148',
     backgroundColor: props.mode === 'dark'?'#183148':'white'
@@ -32,7 +31,6 @@ const News = (props) => {
     setArticles(parsedData.articles);
     setTotalResults(parsedData.totalResults);
     setLoading(false);
-
     props.setProgress(100);
   };
 

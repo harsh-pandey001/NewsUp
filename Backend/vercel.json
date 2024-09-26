@@ -1,16 +1,27 @@
 {
     "version": 2,
     "builds": [
-     {
-      "src": "server.js",
-      "use": "@vercel/node",
-      "config": { "includeFiles": ["dist/**"] }
-     }
+        {
+            "src": "server.js",
+            "use": "@vercel/node",
+            "config": {
+                "includeFiles": [
+                    "dist/**"
+                ]
+            }
+        }
     ],
     "routes": [
-     {
-      "src": "/(.*)",
-      "dest": "server.js"
-     }
-    ]
-   }
+        {
+            "src": "/(.*)",
+            "dest": "server.js"
+        }
+    ],
+    "crons": [
+    {
+      "path": "/api/news/fetch",
+      "schedule": "0 8 * * *"
+    }
+  ]
+
+}

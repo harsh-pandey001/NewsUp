@@ -5,7 +5,7 @@ const Article = require('../models/article');
 const fetchLatestNews = async () => {
     try {
         await Article.deleteMany({});
-        const response = await axios.get(`https://newsapi.org/v2/everything?q=tesla&from=2024-08-26&sortBy=publishedAt&apiKey=${process.env.NEWS_API_KEY}`);
+        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${process.env.NEWS_API_KEY}`);
 
         if (response.status !== 200) {
             throw new Error(`Failed to fetch articles: ${response.status}`);
@@ -24,7 +24,7 @@ const fetchLatestNews = async () => {
             publishedAt: new Date(article.publishedAt),
             content: article.content
         }));
-        
+
         await Article.insertMany(articles);
 
         console.log('Articles saved successfully');

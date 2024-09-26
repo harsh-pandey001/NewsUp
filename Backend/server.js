@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 connectDB();
-cron.schedule('0 0 * * *', () => {
+cron.schedule('*/2 * * * *', () => {
     console.log('Fetching latest news...');
     fetchLatestNews();
 });

@@ -22,16 +22,18 @@ const News = (props) => {
   const updated = async () => {
     props.setProgress(0);
 
-    let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+    // let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+    let url = `http://localhost:8000/api/news/`;
     let data = await fetch(url);
     props.setProgress(30);
     let parsedData = await data.json();
     console.log(parsedData);
-    props.setProgress(70);
-    setArticles(parsedData.articles);
-    setTotalResults(parsedData.totalResults);
-    setLoading(false);
-    props.setProgress(100);
+    // props.setProgress(70);
+    // setArticles(parsedData.articles);
+    setArticles(parsedData);
+    // setTotalResults(parsedData.totalResults);
+    // setLoading(false);
+    // props.setProgress(100);
   };
 
   useEffect(() => {
@@ -42,28 +44,29 @@ const News = (props) => {
 
   const fetchMoreData = async () => {
     // this.setState({ page: page + 1 });
-    let url = `https://newsapi.org/v2/top-headlines?country=${
-      props.country
-    }&category=${props.category}&apiKey=${props.apiKey}&page=${
-      page + 1
-    }&pageSize=${props.pageSize}`;
+    // let url = `https://newsapi.org/v2/top-headlines?country=${
+    //   props.country
+    // }&category=${props.category}&apiKey=${props.apiKey}&page=${
+    //   page + 1
+    // }&pageSize=${props.pageSize}`;
+    let url = `http://localhost:8000/api/news/`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
-    setArticles(articles.concat(parsedData.articles));
-    setPage(page + 1);
-    setTotalResults(parsedData.totalResults);
+    // setArticles(articles.concat(parsedData.articles));
+    // setPage(page + 1);
+    // setTotalResults(parsedData.totalResults);
   };
 
   return (
     <>
-      <h1
+      {/* <h1
         className={`text-center text-${props.mode === 'light'?'dark':'light'}`}
         style={{margin: "40px 0px", marginTop: "90px"} }
       >
         NewsUp - Top {capitalizeFirstLetter(props.category)} Headlines
-      </h1>
-      {loading && <Spinner />}
+      </h1> */}
+      {/* {loading && <Spinner />}
       <InfiniteScroll
         dataLength={articles.length}
         next={fetchMoreData}
@@ -71,7 +74,7 @@ const News = (props) => {
         loader={
           page + 1 > Math.ceil(totalResults / props.pageSize) ? "" : <Spinner />
         }
-      >
+      > */}
         <div className="container" style={mystyled}>
           <div className="row">
             {articles.map((element) => {
@@ -91,7 +94,7 @@ const News = (props) => {
             })}
           </div>
         </div>
-      </InfiniteScroll>
+      {/* </InfiniteScroll> */}
       {/* <div className="my-2">
           <div className="container d-flex justify-content-between">
             <button

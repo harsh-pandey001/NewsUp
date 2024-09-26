@@ -4,8 +4,7 @@ const router = express.Router();
 
 
 router.get('/fetch', fetchLatestNewsHandler);
-
-
 router.get('/', getAllNews);
+
 
 module.exports = router;

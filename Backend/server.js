@@ -19,6 +19,10 @@ cron.schedule('0 0 * * *', () => {
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+    res.send('Hello World')
+  })
+
 const newsRoutes = require('./routes/newsRoutes');
 app.use('/api/news', newsRoutes);
 

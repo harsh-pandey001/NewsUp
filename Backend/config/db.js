@@ -8,14 +8,10 @@ const connectDB = () => {
     useUnifiedTopology: true,
   });
 
-
-  // Event handling for successful connection
   mongoose.connection.on("connected", () => {
     console.log("Connected to MongoDB");
-    // console.log(process.env.MONGODB_URI)
   });
 
-  // Event handling for connection error
   mongoose.connection.on("error", (err) => {
     console.error("Error connecting to MongoDB:", err);
   });

@@ -5,7 +5,7 @@ const Article = require('../models/article');
 const fetchLatestNews = async () => {
     try {
         await Article.deleteMany({});
-        const response = await axios.get(`https://newsapi.org/v2/everything?domains=wsj.com&apiKey=${process.env.NEWS_API_KEY}`);
+        const response = await axios.get(`https://newsapi.org/v2/everything?q=tesla&from=2024-08-26&sortBy=publishedAt&apiKey=${process.env.NEWS_API_KEY}`);
 
         if (response.status !== 200) {
             throw new Error(`Failed to fetch articles: ${response.status}`);

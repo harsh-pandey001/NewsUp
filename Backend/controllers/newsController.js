@@ -11,28 +11,21 @@ const fetchLatestNews = async () => {
             throw new Error(`Failed to fetch articles: ${response.status}`);
         }
 
-        for (const article of response.data.articles) {
-            const sourceName = article.source.name || 'Unknown Source';
-            const newArticle = new Article({
-                source: {
-                    name: sourceName,
-                    id: article.source.id || 'unknown_id', 
-                },
-                author: article.author || 'Unknown Author',
-                title: article.title || 'No Title',
-                description: article.description || 'No Description',
-                url: article.url || '',
-                urlToImage: article.urlToImage || '',
-                publishedAt: new Date(article.publishedAt) || new Date(),
-                content: article.content || 'No Content',
-            });
-
-            try {
-                await newArticle.save();
-            } catch (err) {
-                console.error('Error saving article:', err.message);
-            }
-        }
+        const articles = response.data.articles.map(article => ({
+            source: {
+                name: article.source.name || 'Unknown Source',
+                id: article.source.id
+            },
+            author: article.author,
+            title: article.title,
+            description: article.description,
+            url: article.url,
+            urlToImage: article.urlToImage,
+            publishedAt: new Date(article.publishedAt),
+            content: article.content
+        }));
+        
+        await Article.insertMany(articles);
 
         console.log('Articles saved successfully');
     } catch (error) {

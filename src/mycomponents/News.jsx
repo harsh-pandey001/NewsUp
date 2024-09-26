@@ -23,7 +23,7 @@ const News = (props) => {
     props.setProgress(0);
 
     // let url = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
-    let url = `http://localhost:8000/api/news/`;
+    let url = `https://newsbackend-sigma.vercel.app/api/news/`;
     let data = await fetch(url);
     props.setProgress(30);
     let parsedData = await data.json();
@@ -49,7 +49,7 @@ const News = (props) => {
     // }&category=${props.category}&apiKey=${props.apiKey}&page=${
     //   page + 1
     // }&pageSize=${props.pageSize}`;
-    let url = `http://localhost:8000/api/news/`;
+    let url = `https://newsbackend-sigma.vercel.app/api/news/`;
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);

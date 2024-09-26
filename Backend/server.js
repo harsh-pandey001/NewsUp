@@ -20,8 +20,8 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send('Hello World')
-  })
+    res.send('Backend api')
+})
 
 const newsRoutes = require('./routes/newsRoutes');
 app.use('/api/news', newsRoutes);
